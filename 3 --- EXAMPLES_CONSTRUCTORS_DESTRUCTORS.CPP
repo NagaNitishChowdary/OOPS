@@ -241,7 +241,77 @@ public:
 };
 
 int main(){
-    B obj1 ; // WHEN AN OBJECT IS CREATED FIRSTLY MEMORY IS ALLOCATED FOR ITS ATTRIBUTES AND THEN CONSTRUCTORS ARE CALLED 
+    B obj1 ; // WHEN AN OBJECT IS CREATED FIRSTLY MEMORY IS ALLOCATED FOR ITS ATTRIBUTES FOR LOCAL VARIABLES AND THEN CONSTRUCTORS ARE CALLED 
     B obj2 ; 
+    return 0 ; 
+}
+
+// 9 --- B
+// OUTPUT --- ABAB
+
+class A{
+public:
+    A(){ cout << "A" ; }
+    A(int x){ cout << x ; }
+};
+
+class B{
+    A obj1 ;
+public:
+    static A ob ;  // HERE NO MEMORY IS CREATED FOR OB AS IT IS STATIC THE MEMORY IS CREATED WHEN IT IS USED
+    // IT CAN USED VIA OUTSIDE THE CLASS AS THIS STATEMENT HERE IS OF NO USE 
+    B(){ cout << "B" ; }
+};
+
+int main(){
+    B obj1 ;
+    B obj2 ; 
+    return 0 ; 
+}
+
+// 9 --- C
+// OUTPUT --- AABAB
+// FIRST GLOBAL VARIABLES CREATED FIRST AND THEN MAIN FUNCTION IS EXECUTED 
+
+class A{
+public:
+    A(){ cout << "A" ; }
+    A(int x){ cout << x ; }
+};
+
+class B{
+    A obj1 ;
+public:
+    static A ob ; 
+    B(){ cout << "B" ; }
+};
+
+A B::ob ;  // OB BELONGS TO CLASS B WHICH IS OF TYPE A 
+
+int main(){
+    B obj1 ;
+    B obj2 ; 
+    return 0 ; 
+}
+
+// 10 --- 
+// OUTPUT --- 1211
+
+class A{
+    int a ; 
+public:
+    A(){ a = 0 ; }
+    A(int x){ a = x ; }
+    void print(){ cout << a ; }
+};
+
+int main(){
+    static A obj1 ;
+    static A obj2(12) ;
+    A a(11) ;
+    A b = obj2 ;
+    b.print() ; 
+    obj1 = a ; 
+    obj1.print() ;  
     return 0 ; 
 }
