@@ -135,3 +135,22 @@ int main(){
     obj.get() ; 
     return 0 ; 
 }
+
+// 6 --- CONSTRUCTORS 
+
+class A{  // ERROR AS CONST VARIABLES CANNOT BE MODIFIED
+private:
+    const int a = 5 ; ; 
+    int b ;
+public:
+    A(int x,int y){
+        a = x ;
+        b = y ;
+        cout << "Initialized " << endl ; 
+    }
+};
+
+int main(){
+    A obj(2,4) ; 
+    return 0 ; 
+}
