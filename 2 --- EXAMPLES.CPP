@@ -192,7 +192,26 @@ int main(){
     A obj1 , obj2 , obj3 ;
     obj1.increment() ;
     obj2.increment() ;
-    A::increment() ;
+    A::increment() ; // ONLY STATIC FUNCTIONS CAN BE CALLED DIRECTLY WITH THE CLASS 
     cout << obj3.get() << endl ;
+    return 0 ; 
+}
+
+// 9 --- STATIC FUNCTIONS AND METHODS  
+
+class A{  // OUTPUT IS 32 
+public:
+    static int a ;
+    static void increment(){ a += 3 ; }
+    int get(A obj){ return a+obj.a ; }
+};
+
+int A::a = 10 ;
+
+int main(){
+    A obj1 , obj2 ;
+    obj1.increment() ;
+    obj2.increment() ;
+    cout << obj2.get(obj1) << endl ;
     return 0 ; 
 }
