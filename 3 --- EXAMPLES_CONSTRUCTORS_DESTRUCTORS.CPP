@@ -60,7 +60,7 @@ int main(){
     return 0 ; 
 }
 
-4 --- FUNCTION OVERLOADING 
+// 4 --- FUNCTION OVERLOADING 
 
 class myClass{ 
 public:
@@ -90,10 +90,9 @@ int main(){
     return 0 ; 
 }
 
-5 --- DESTRUCTORS 
-
-OUTPUT IS CONSTRUCTOR 1 , CONSTRUCTOR 2 , CONSTRUCTOR 3 
-DESTRUCTOR 3 , DESTRUCTOR 2 , DESTRUCTOR 1 
+// 5 --- DESTRUCTORS 
+// OUTPUT IS CONSTRUCTOR 1 , CONSTRUCTOR 2 , CONSTRUCTOR 3 
+// DESTRUCTOR 3 , DESTRUCTOR 2 , DESTRUCTOR 1 
 
 class myClass{
     int a ; 
@@ -113,10 +112,9 @@ int main(){
     return 0 ; 
 }
 
-6 --- A
-
-OUTPUT IS CON 1 , CON 2 , CON 3 , CON 4 , DES 4 , CON 5 , DES 5
-DES 3 , DES 2 , DES 1 
+// 6 --- A
+// OUTPUT IS CON 1 , CON 2 , CON 3 , CON 4 , DES 4 , CON 5 , DES 5
+// DES 3 , DES 2 , DES 1 
 
 class myClass{
     int a ; 
@@ -141,9 +139,9 @@ int main(){
     return 0 ; 
 }
 
-6 --- B
-OUTPUT IS CON 1 , CON 2, CON 3 , CON 4 , MAIN ENDS HERE 
-DES 3 , DES 2 , DES 1 , DES 4
+// 6 --- B
+// OUTPUT IS CON 1 , CON 2, CON 3 , CON 4 , MAIN ENDS HERE 
+// DES 3 , DES 2 , DES 1 , DES 4
 
 class myClass{
     int a ; 
@@ -165,5 +163,85 @@ int main(){
     myClass obj1(1) , obj2(2) , obj3(3) ;
     myFun(4) ;
     cout << "MAIN ENDS HERE " << endl ;
+    return 0 ; 
+}
+
+// 7 --- COPY CONSTRUCTORS
+
+// 7 --- COPY CONSTRUCTOR 
+// OUTPUT IS DEF 1- , COPY 11 , COPY 11 
+
+class A{
+    int a ;
+public:
+    A(){
+        a = 10 ;
+        cout << "Default constructor: " << a << endl ; 
+    }
+
+    A(const A &q){
+        a = q.a ;
+        cout << "Copy constructor: " << a << endl ; 
+    }
+
+    void set_a(int x){
+        a = x ; 
+    }
+}; 
+
+int main(){
+    A obj;
+    obj.set_a(11) ;
+    A a1 = obj ;
+    A a2(obj) ;
+    return 0 ;
+}
+
+// 8 
+// OUTPUT ---  CON CLASS A , HELLO , HELLO  
+
+class A{
+public:
+    A(){
+        cout << "Constructor class A" << endl ; 
+    }
+};
+
+class myClass{
+public:
+    static A getvalue(){ // AS IT IS A STATIC FUNCTION , THERE IS ONLY ONE COPY OF IT IS PRESENT 
+        // HENCE FOR ANY NUMBER OF OBJECTS THE CONSTRUCTOR IS CALLED ONLY ONCE 
+        static A a ;
+        cout << "Hello" << endl ;
+        return a ; 
+    }
+};
+
+int main(){
+    myClass obj1 ;
+    A obj2 = myClass::getvalue() ; 
+    // STATIC FUNCTIONS CAN BE DIRECTLY ACCESSED THROUGH CLASS NAME 
+    A obj3 = obj1.getvalue() ; 
+    return 0 ; 
+}
+
+// 9 --- A
+// OUTPUT --- ABAB 
+
+class A{
+public:
+    A(){ cout << "A" ; }
+    A(int x){ cout << x ; }
+};
+
+class B{
+    A obj1 ;
+public:
+    B(){ cout << "B" ; }
+};
+
+int main(){
+    B obj1 ; // WHEN AN OBJECT IS CREATED FIRSTLY MEMORY IS ALLOCATED FOR ITS ATTRIBUTES AND THEN CONSTRUCTORS ARE CALLED 
+    B obj2 ; 
     return 0 ; 
 }
