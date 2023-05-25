@@ -50,7 +50,7 @@ int main(){
     A *ptr ; 
     ptr = &obj1 ;
     // *ptr.a = 5 ; // THIS IS AN ERROR BECAUSE . OPERATOR HAS HIGHEST PRECEDENCE
-    (*ptr).a = 5 ;  
+    (*ptr).a = 5 ;  // OR   ptr -> a = 5 ; 
     cout << obj1.getSum() << endl ; 
     return 0 ;
 }
