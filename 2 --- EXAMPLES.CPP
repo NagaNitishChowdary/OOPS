@@ -154,3 +154,45 @@ int main(){
     A obj(2,4) ; 
     return 0 ; 
 }
+
+// 7 --- STATIC VARIABLE 
+
+class A{  // OUTPUT IS 13 , 13 , 13
+public:
+    static int a ;
+    void increment(){ a++ ; }
+    int get(){ return a ; }
+};
+
+int A::a = 10 ;
+
+int main(){
+    A obj1 , obj2 , obj3 ;
+    obj1.increment() ;
+    obj2.increment() ;
+    obj3.increment() ;
+    cout << obj3.get() << " " << obj2.get() << " " << obj1.get() << endl ;
+    return 0 ; 
+}
+
+// 8 --- STATIC VARIABLE AND STATIC FUNCTION 
+// STATIC FUNCTIONS CAN ONLY ACCESS STATIC VARIABLES 
+// BUT STATIC VARIABLES CAN BE ACCESSED BY ANY OTHER FUNCTIONS 
+
+class A{ // OUTPUT IS 13
+public:
+    static int a ;
+    static void increment(){ a++ ; }
+    static int get(){ return a ; }
+};
+
+int A::a = 10 ;
+
+int main(){
+    A obj1 , obj2 , obj3 ;
+    obj1.increment() ;
+    obj2.increment() ;
+    A::increment() ;
+    cout << obj3.get() << endl ;
+    return 0 ; 
+}
