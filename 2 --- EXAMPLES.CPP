@@ -11,6 +11,16 @@ public:   // IF PUBLIC IS NOT MENTIONED THEN IT DEFAULTLY TAKES AS PRIVATE AND G
     }
 };
 
+// OR 
+
+class A{
+public:
+    int a;
+    void modify_a(int a){
+        this -> a = a ; 
+    }
+};
+
 int main(){
     A a ;
     a.modify_a(10) ; 
