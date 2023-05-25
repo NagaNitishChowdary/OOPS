@@ -36,3 +36,28 @@ int main(){
     cout << a.a << endl ;
     return 0 ; 
 }
+
+// 3 --- ERROR AT LINE [MYOBJ OBJ2 ;] BECAUSE THE COMPILER CREATES A DEFAULT CONSTRUCTOR IF NO OTHER CONSTRUCTER
+// IS PRESENT IN THE CLASS IF THERE IS A CONSTRUCTOR IN THE CLASS THEN COMPILER DOES N'T CREATE ANY DEFAULT CONSTRUCTORS 
+
+class myClass{
+    int a ; 
+public:
+    myClass(int x){
+        a = x ; 
+        cout << "Constructor " << a << endl ;  
+    }
+
+    int getvalue(){
+        return a ; 
+    }
+};
+
+int main(){
+    myClass obj1(1)  ; 
+    obj1.getvalue() ;
+    myClass obj2 ;   // ERROR 
+    return 0 ; 
+}
+
+// 4 --- 
