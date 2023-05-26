@@ -302,3 +302,50 @@ int main(){
     C c ;
     return 0 ; 
 }
+
+// 9 --- OUTPUT --- 80 
+// size of class == sum of size of elements in it 
+class base{  // 80 bytes
+public:
+    int arr[10] ;
+};
+
+class b1:public base{} ; // 80 bytes
+
+class b2:public base{} ; // 80 bytes
+
+class derived: public b1,public b2{} ; // 80 + 80 = 160 bytes
+
+int main(){
+    cout << sizeof(derived) ;
+    return 0 ; 
+}
+
+// 10 --- A 
+// WHICH SPECIFIER MAKES ALL THE DATA MEMBERS AND FUNCTIONS 
+// OF THE BASE CLASS INACCESSIBLE BY THE DERIVED CLASS ?
+
+// ANS --- PRIVATE 
+
+// 10 --- B 
+// OUTPUT --- 15 , 10 
+class A{
+public:
+    int a ;
+    void change(int i){ a = i ; }
+    void value_of_a(){ cout << a << endl ; }
+};
+
+class B : public A{
+    int a = 15 ; 
+public:
+    void print(){ cout << a << endl ; } 
+};
+
+int main(){
+    B b ;
+    b.change(10) ;
+    b.print() ; 
+    b.value_of_a() ; 
+    return 0 ; 
+}
