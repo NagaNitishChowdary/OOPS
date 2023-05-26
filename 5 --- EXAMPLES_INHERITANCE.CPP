@@ -184,6 +184,69 @@ public:
 };
 
 int main(){
+    C obj(2,5,9) ;
+    return 0 ; 
+}
+
+// 7 --- A
+// OUTPUT --- A9B5 HELLO WORLD C2
+// HERE WE ARE CALLING GET IN WHICH IT IS IN CLASS A WHICH IS PUBLIC
+// AND WHEN IT COMES TO B IT IS PROTECTED AND THEN C IT IS STILL PROTECTED 
+// HENCE WE CAN ACCESS PROTECTED METHODS WITH IN THE CLASS 
+// THERE IS AN ERROR WE CREATE OBJECT AND CALL THE GET FUNCTION 
+
+class A{
+public: 
+    A(int x){ cout << "A" << x ; }
+    void get(){ cout << " HELLO WORLD " ; }
+};
+
+class B : protected A{
+public:
+    B(int x,int y):A(y){
+        cout << "B" << x ; 
+    }
+};
+
+class C : public B{
+public:
+    C(int x,int y,int z) : B(y,z){
+        get() ; 
+        cout << "C" << x ; 
+    }
+};
+
+int main(){
     C obj(2,5,9) ; 
+    return 0 ; 
+}
+
+// 7 --- B 
+// OUTPUT --- A5 HELLO WORLD 
+// AS IN CLASS A GET FUNCTION IN PUBLIC HENCE WE CAN USE IT OUTSIDE THE FUNCTION 
+class A{
+public: 
+    A(int x){ cout << "A" << x ; }
+    void get(){ cout << " HELLO WORLD " ; }
+};
+
+class B : protected A{
+public:
+    B(int x,int y):A(y){
+        cout << "B" << x ; 
+    }
+};
+
+class C : public B{
+public:
+    C(int x,int y,int z) : B(y,z){
+        get() ; 
+        cout << "C" << x ; 
+    }
+};
+
+int main(){
+    A obj1(5) ;
+    obj1.get() ; 
     return 0 ; 
 }
