@@ -73,7 +73,7 @@ public:
     C(int x){ cout << "C" << x ; }
 };
 
-class B : public A,C{
+class B : public A,C{ // THE CONSTRUCTORS ARE CALLED ACCORDING TO INHERITED ORDER 
 public:
     B(int x,int y,int z) : C(x) , A(y){
         cout << "B" << z ; 
@@ -82,5 +82,25 @@ public:
 
 int main(){
     B obj(2,5,9) ;  
+    return 0 ;
+}
+
+// 5 --- A
+// OUTPUT --- ERROR BECAUSE WE NEED TO DECLARE B(int x) : A(x) as it is not declared hence the compiler tries to find the default constructor
+// and hence no default constructor and compiler unable to create as already parameterized constructor is present in class A
+class A{
+public:
+    A(int x){ cout << "A" << x ; }
+};
+
+class B : public A{
+public:
+    B(int x){
+        cout << "B" << x ; 
+    }
+};
+
+int main(){
+    B obj(12) ;  
     return 0 ;
 }
