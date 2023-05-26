@@ -250,3 +250,55 @@ int main(){
     obj1.get() ; 
     return 0 ; 
 }
+
+// 7 --- C 
+// ERROR --- BECAUSE GET FUNCTION IN CLASS A IS PUBLIC AND SAME GET FUNCTION IN CLASS B AND C IS PROTECTED 
+// HENCE IT CAN ONLY BE INHERITED AND USED IN THE SAME CLASS AND WE CANNOT ACCESS IT FROM OUTSIDE THE CLASS 
+class A{
+public: 
+    A(int x){ cout << "A" << x ; }
+    void get(){ cout << " HELLO WORLD " ; }
+};
+
+class B : protected A{
+public:
+    B(int x,int y):A(y){
+        cout << "B" << x ; 
+    }
+};
+
+class C : public B{
+public:
+    C(int x,int y,int z) : B(y,z){
+        get() ; 
+        cout << "C" << x ; 
+    }
+};
+
+int main(){
+    B obj1(5,6) ;
+    obj1.get() ; 
+    return 0 ; 
+}
+
+// 8 --- DESTRUCTORS WITH INHERITANCE 
+// OUTPUT --- CBA
+class A{
+public:
+    ~A(){ cout << "A" ; }
+};
+
+class B{
+public:
+    ~B(){ cout << "B" ; }
+};
+
+class C:public A,B{   // if class C : public B,A then ouput is --- CAB
+public:
+    ~C(){ cout << "C" ; }
+};
+
+int main(){
+    C c ;
+    return 0 ; 
+}
