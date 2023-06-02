@@ -328,3 +328,334 @@ int main(){
     (p -> *fptr)("World") ; 
     return 0 ; 
 }
+
+// 21 --- OUTPUT --- B  
+
+// WHICH OF THE FOLLOWING IS NOT A TYPE OF CONSTRUCTOR ?
+// A) COPY CONSTRUCTOR 
+// B) FRIEND CONSTRUCTOR 
+// C) PARAMETERIZED CONSTRUCTOR 
+// D) DEFAULT CONSTRUCTOR
+
+// 22 --- OUTPUT --- D 
+
+// WHAT IS THE CORRECT WAY TO DECLARE A FUNCTION VIRTUAL ?
+// A) int fun() virtual = {} ;
+// B) virtual int fun() = 0 ;
+// C) virtual fun() = 0 ; 
+// D) virtual int fun(){} ; 
+
+// 23 --- OUTPUT --- A,C
+
+// WHICH OF THE FOLLOWING IS/ARE ALLOWED WHERE B IS THE BASE CLASS AND D IS THE DERIVED CLASS
+// A) B obj = D() ; 
+// B) D obj  = B() ; 
+// C) B *ptr ;  D obj ; 
+//    ptr = &obj ; 
+// D) D *ptr ; B obj ; 
+//    ptr = &obj ; 
+
+// 24.A --- OUTPUT --- 4,5  2,6
+
+class A{
+    int a,b ; 
+public:
+    A(int x,int y){
+        a = x ; 
+        b = y ; 
+    }
+
+    void swap(A ob){
+        int temp = ob.a ;
+        ob.a = a ; 
+        a = temp ; 
+        temp = ob.b ; 
+        ob.b = b ; 
+        b = temp ; 
+    }
+
+    void print(){ cout << a << " " << b << " " ; }
+};
+
+int main(){
+    A obj1(4,5) , obj2(2,6) ;
+    obj1.print() ; 
+    obj1.swap(obj2) ;
+    obj1.print() ; 
+    return 0 ; 
+}
+
+// 24.B --- OUTPUT --- 26  26
+
+class A{
+    int a,b ; 
+public:
+    A(int x,int y){
+        a = x ; 
+        b = y ; 
+    }
+
+    void swap(A ob){
+        int temp = ob.a ;
+        ob.a = a ; 
+        a = temp ; 
+        temp = ob.b ; 
+        ob.b = b ; 
+        b = temp ; 
+    }
+
+    void print(){ cout << a << b << " " ; }
+};
+
+int main(){
+    A obj1(4,5) , obj2(2,6) ;
+    obj2.print() ; 
+    obj1.swap(obj2) ;
+    obj2.print() ; 
+    return 0 ; 
+}
+
+// 24.C --- OUTPUT --- 26  45
+
+class A{
+    int a,b ; 
+public:
+    A(int x,int y){
+        a = x ; 
+        b = y ; 
+    }
+
+    void swap(A&ob){  
+        int temp = ob.a ;
+        ob.a = a ; 
+        a = temp ; 
+        temp = ob.b ; 
+        ob.b = b ; 
+        b = temp ; 
+    }
+
+    void print(){ cout << a << b << " " ; }
+};
+
+int main(){
+    A obj1(4,5) , obj2(2,6) ;
+    obj2.print() ; 
+    obj1.swap(obj2) ;
+    obj2.print() ; 
+    return 0 ; 
+}
+
+// 25 --- OUTPUT --- 321
+// FOR INPUT 123
+
+long long fun(long long n){
+    long long result = 0 ; 
+    while(n != 0){
+        result = result*10 + n%10 ; 
+        n /= 10 ; 
+    }
+    return result ; 
+}
+
+int main(){
+    long long n ; cin >> n ; 
+    cout << fun(n) << endl ; 
+    return 0 ; 
+}
+
+// 26 --- METHOD OVERLOADING
+// OUTPUT --- 16,4
+
+class A{
+    int a ; // a = 4  
+public:
+    A(int x){ a = x ; }
+    int fun(){ return a*a ; }
+    int fun(int x){ return x*x ; }
+    void fun(int x,int y){ cout << (x*y) << endl ; }
+};
+
+class B:public A{
+    int a,b ; // a = 1 , b = 4
+public:
+    B(int x,int y):A(y){
+        a = x;  b = y ; 
+    }
+};
+
+int main(){
+    B obj1(1,4) ; 
+    cout << obj1.fun() << endl ; 
+    obj1.fun(1,4) ; 
+    return 0 ; 
+}
+
+// 27 --- METHOD OVERLOADING
+// OUTPUT --- 17,16
+
+class A{
+    int a ; // a = 4 
+public:
+    A(int x){ a = x ; }
+    int fun(){ return a*a ; }
+    void fun(int x,int y,int z){ cout << (x*y*z) << endl ; }
+};
+
+class B:public A{
+    int a,b ;  // a = 1 , b = 4 
+public:
+    B(int x,int y):A(y){
+        a = x;  b = y ; 
+    }
+    int fun(){ return a*a+b*b ; }
+};
+
+int main(){
+    B obj1(1,4) ; 
+    cout << obj1.fun() << endl ; 
+    obj1.A::fun(1,4,4) ; 
+    return 0 ; 
+}
+
+// 28 --- STATIC VARIABLES , RECURSION , PASS BY REFERENCE 
+// OUTPUT --- 68 , 2, 56 
+
+int fun(int &b,int &a){
+    static int z = 4 ; 
+    while(--z > 0){
+        fun(b,a) ; 
+        a *= 2 ; 
+        b-- ; 
+    }
+    return a+b+10 ; 
+}
+
+int main(){
+    int a = 5 , b = 7 ; 
+    cout << fun(a,b) << endl ;
+    cout << a << " " << b << endl ;  
+    return 0 ; 
+}
+
+// 29 --- OUTPUT --- D 
+
+// WHICH OF THE FOLLOWING FEATURES MUST BE SUPPORTED BY ANY PROGRAMMING LANGUAGE TO BECOME A PURE OOP LANGUAGE
+// A) ENCAPSULATION 
+// B) INHERITANCE 
+// C) POLYMORPHISM 
+// D) ALL OF THE ABOVE 
+
+// 30 --- OUTPUT --- 4
+// THE SIZE OF THE CLASS IS THE SUM OF SIZE OF MEMBERS OF CLASS
+// SIZE OF THE STATIC MEMBERS CANNOT COUNT IN THE CLASS 
+
+class A{
+    static int i ; 
+    int j ; 
+};
+
+int A::i ; 
+
+int main(){
+    cout << sizeof(A) ;   
+    return 0 ; 
+}
+
+// 31 --- OUTPUT --- NOT EQUAL 
+
+int main(){
+    int a = 2.1 ;
+    float b = 2.1 ;
+    if(a == b) cout << "Equal" << endl ; 
+    else cout << "Not Equal" << endl ;   
+    return 0 ; 
+}
+
+// 32.A --- OUTPUT --- ERROR --- CLASS HOST HAS NO MEMBER NAMED PRINT
+
+class Host{
+public:
+    class Nested{
+    public:
+        void print(){ cout << "Hello World" << endl ; }
+    };
+};
+
+int main(){
+    Host bar ; 
+    bar.print() ; 
+    return 0 ; 
+}
+
+// 32.B --- OUTPUT --- HELLO WORLD
+
+class Host{
+public:
+    class Nested{
+    public:
+        void print(){ cout << "Hello World" << endl ; }
+    };
+};
+
+int main(){
+    Host::Nested foo ; 
+    foo.print() ; 
+    return 0 ; 
+}
+
+// 33 --- OUTPUT --- ERROR --- WE CANNOT CREATE A OBJECT OF THE CLASS BEFORE ITS DEFINITION IS FINISHED
+// field 'h' has incomplete type 'Host'
+
+class Host{
+    int a ; 
+public:
+    class Nested{
+        Host h ; 
+    public:
+        Nested(){ h.a = 15 ; }
+        int get(){ return h.a ; }
+    };
+};
+
+int main(){
+    Host::Nested foo ; 
+    cout << foo.get() ; 
+    return 0 ; 
+}
+
+// 34 --- OUTPUT --- caba
+
+void gun(string s){
+    if(s[0] == '\0') return ; 
+    gun(s.substr(1)) ; 
+    cout << s[0] ; 
+}
+
+int main(){
+    string s ; // cin >> s ; 
+    s = "abac" ; 
+    gun(s) ; cout << endl ; 
+    return 0 ; 
+}
+
+// 35 --- OUTPUT --- 14
+
+int fun1(int) ; 
+int fun2(int) ; 
+int fun1(int n){
+    if(n <= 1) return 1 ; 
+    return fun2(n-2) + fun1(n-1) ;
+}
+
+int fun2(int n){
+    if(n<=0) return 0 ; 
+    if(n%3 == 0) return fun2(n/2) ;
+    else return fun1(n-3) ; 
+}
+
+int main(){
+    int n ; // cin >> n ;
+    n = 13 ; 
+    cout << fun2(n) << endl ; 
+    return 0 ; 
+}
