@@ -292,4 +292,39 @@ int main(){
 // A) CONSTRUCTS A NEW CLASS
 // B) CONSTRUCTS A NEW OBJECT 
 // C) CONSTRUCTS A NEW FUNCTION 
-// D) INITIALIZES AN OBJECT 
+// D) INITIALIZES AN OBJECT
+
+// 19 --- OUTPUT --- HELLO
+
+class Foo{
+public:
+    Foo(int i=0){ _i = 1 ;}
+    void f(){ cout << "Hello!" << endl ; }
+private:
+    int _i ; 
+};
+
+int main(){
+    Foo *p = 0 ; // NULL POINTER OF FOO CLASS WE CAN ACCESS ANY FUNCTION IN FOO CLASS WITH THIS POINTER 
+    p -> f() ; 
+    return 0 ; 
+}
+
+ // 20 --- OUTPUT --- HELLO WORLD
+
+class Foo{
+public:
+    int f(string str){
+        cout << str << endl ;
+        return 1 ;  
+    }
+};
+
+int main(){
+    int (Foo::*fptr) (string) = &Foo::f ; // *fptr = f  ---> fptr is pointer to class Foo and points to fucntion which has argument string 
+    Foo obj ; 
+    (obj.*fptr)("Hello") ;
+    Foo* p = &obj ;
+    (p -> *fptr)("World") ; 
+    return 0 ; 
+}
