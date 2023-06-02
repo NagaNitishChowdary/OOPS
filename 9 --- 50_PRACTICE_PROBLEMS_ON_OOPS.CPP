@@ -1,3 +1,6 @@
+#include<bits/stdc++.h>
+using namespace std ; 
+
 // 1 --- ANSWER --- B 
 
 // WHICH OF THE FOLLOWING IS NOT A FEATURE OF OOPS
@@ -31,6 +34,130 @@
 // C) FRIEND FUNCTION --- A FUNCTION WHICH CAN ACCESS PRIVATE MEMBERS OF THE CLASS
 // D) STATIC FUNCTION --- IT ALLOCATES SINGLE MEMORY
 
-// 5 --- ANSWER --- 
+// 5 --- ANSWER --- 36
+// WHEN WE CREATE A POINTER AND ASSIGN OBJECT OF INHERITED ONE THEN OVERRIDING WILL TAKE PLACE 
+// NOW JUST DEFAULT COPYING OCCURS HENCE BASE CLASS IS EXECUTED 
+// PRECEDENCE : (++) > (+) > (>> (OR) <<)
 
-// 
+class One{
+public:
+    virtual int fun(int x,int y){
+        return (x++ + ++y + x<<2) ; 
+    }
+};
+
+class Two:public One{
+public:
+    int fun(int x,int y){
+        return (++x + y++ + y>>2) ;
+    }
+};
+
+int main(){
+    One obj = Two() ; 
+    cout << obj.fun(2,3) << endl ; 
+}
+
+// 6 --- OUTPUT --- 2 
+
+class One{
+public:
+    virtual int fun(int x,int y){
+        return (x++ + ++y + x<<2) ; 
+    }
+};
+
+class Two:public One{
+public:
+    int fun(int x,int y){
+        return (++x + y++ + y>>2) ;
+    }
+};
+
+int main(){
+    One *ptr ; 
+    Two obj ; 
+    ptr = &obj ; 
+    cout << ptr -> fun(2,3) << endl ;
+}
+
+// 7 --- OUTPUT --- 1,2,2  1,4,4  1,5,2
+// HERE PRECEDENCE OF *(DEREFERENCE) AND ++ IS SAME 
+// AND THE ASSOCIAVITY IS FROM RIGHT TO LEFT 
+
+int main(){
+    int a[] = {1,2,3,4,5,6,7} ;  // a = 100 , *a = 1
+    int *p[] = {a+1,a+3,a,a+5,a+4} ; // p = 200 
+    int **q = p ;
+    // address of a = 100 , b = 200 , c = 300 
+    // a = [100,104,108,112,116,120,124]
+    // p = [104,112,100,120,116]
+    // q = [200]
+    cout << *a << " " << **p << " " << **q << endl ; 
+    ++*++*q ; // ++(*(++(*q)))
+    // p = [108,112,100,120,116]
+    // a = [1,2,4,4,5,6,7]  
+    // here q = 200 , &q = 300 , *q = 108 , *q = p 
+    cout << *a << " " << **p << " " << **q << endl ;
+    ++++*p ; // ++(++(*p)) --- p = 200 , *p = 108 
+    // p = [116,112,100,120,116]
+    ++*++++q ; // ++(*(++(++q))) ---> ++(*(208)) ---> q = 208
+    // p = [116,112,104,120,116]
+    cout << *a << " " << **p << " " << **q << endl ; 
+    return 0 ; 
+}
+
+// 8 --- OUTPUT --- IS LLO NNC HIS 
+
+char *p[] = {"HELLO" , "THIS" , "IS" , "KNNC"} ; 
+// p = [100,104,108,112] --- > 100 = ['H','E','L','L','O','\N'] , 104 = ['T','H','I','S','\N'] ...
+// p = [10 , 20 , 30 , 40]
+//     100  200   300  400
+char **q[] = {p+3 , p+2 , p+1 , p} ;
+// q = [112 , 108 , 104 , 100]
+//      200   204   208   212
+char ***r = q ; 
+// r = [200]
+//      300 
+
+int main(){
+    cout << **++r << " " ;  // *(*(++r)) ---> *(*(204)) --> *(108) ---> 30 ---> "IS" 
+    // r = [204]
+    //      300
+    cout << *--*++r+2 << " " ; // (*(--(*(++r))))+2 
+    // r = [208]
+    //      300
+    // q = [112 , 108 , 100 , 100]
+    //      200   204   208   212
+    cout << *r[-2]+1 << " " ; // r[-2] = (r-2) = 200 , *r[-2] = 112 
+    // r = [208]
+    //      300
+    cout << r[-1][-1]+1 << endl ; // r[-1] = *(r-1) = 108 ---> *(104) ---> 20+1 ---> 21
+    return 0 ; 
+}
+
+// 9 --- OUTPUT --- A
+
+// WHAT MEMBERS OF THE BASE ARE NEVER ACCESSIBLE TO THE CHILD
+// A) PRIVATE MEMBERS
+// B) PROTECTED MEMBERS
+// C) BOTH PRIVATE AND PROTECTED MEMBERS 
+// D) NONE OF THE ABOVE 
+
+// 10 --- OUTPUT --- C
+// ALL TYPES OF ASSIGHMENTS CAN BE OVERLOADED 
+
+// WHICH OF THE FOLLOWING OPERATORS CAN BE OVERLOADED ?
+// A) ::(SCOPE RESOLUTION)
+// B) .(MEMBER SELECTION)
+// C) += (SHORTHAND ASSIGNMENT)
+// D) .*(MEMBER SELECTION THROUGH POINTER TO FUNCTION)
+// E) SIZEOF(DATATYPE)
+
+// 11 --- OUTPUT --- D
+
+// A CLASS IS TAGGED ABSTRACT , IF IT HAS 
+// A) EXACTLY ONE VIRTUAL METHOD 
+// B) ATLEAST ONE VIRTUAL METHOD
+// C) EXACTLY ONE PURE VIRTUAL METHOD 
+// D) ATLEAST ONE PURE VIRTUAL METHOD 
