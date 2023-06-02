@@ -161,3 +161,135 @@ int main(){
 // B) ATLEAST ONE VIRTUAL METHOD
 // C) EXACTLY ONE PURE VIRTUAL METHOD 
 // D) ATLEAST ONE PURE VIRTUAL METHOD 
+
+// 12 --- CONSTRUCTORS 
+// OUTPUT --- ERROR AS CLASS B IS INHERITING PRIVATELY 
+// HENCE THE CONSTRUCTOR CANNOT BE PRICATE 
+// ERROR --- CANNOT CAST 'D' TO ITS PRIVATE BASE CLASS 'B'
+
+class B{
+public:
+    B(){ cout << "Class B" << endl ; }
+};
+
+class C{
+public:
+    C(){ cout << "Class C" << endl ; }
+};
+
+class D:public C,B{
+public:
+    D(){ cout << "Class D" << endl ; }
+};
+
+int main(){
+    B *b = new D() ; 
+    return 0 ; 
+}
+
+// 13 --- OUTPUT --- ERROR --- WE CANNOT CREATE OBJECT FOR ABSTRACT CLASS
+
+class One{
+public:
+    virtual int fun(int x,int y){
+        return (x++ + ++y + x<<2) ; 
+    }
+};
+
+class Two:public One{ // abstract class
+public:
+    int fun(int x,int y){
+        return (++x + y++ + y>>2) ; 
+    }
+    virtual int fun2() = 0 ; // pure virtual function 
+};
+
+int main(){
+    One *ptr ; 
+    Two obj ; 
+    ptr = &obj ; 
+    cout << ptr -> fun(2,3) << endl ; 
+    return 0 ; 
+}
+
+// 14 --- DESTRUCTORS 
+// OUTPUT --- DERIVED DESTRUCTORS , C VIRTUAL FUNCTION , B VIRTUAL FUNCTION
+
+class B{
+public:
+    virtual ~B(){ cout << "B virtual function" << endl ; }
+};
+
+class C{
+public:
+    virtual ~C(){ cout << "C virtual function" << endl ; }
+};
+
+class D:public B,public C{
+public:
+    ~D(){ cout << "Derived destructor" << endl ; }
+};
+
+int main(){
+    B *b = new D() ; 
+    delete b ;
+    return 0 ;
+}
+
+// 15 --- DESTRUCTORS 
+// OUTPUT --- A CLASS CANNOT HOLD ANY OTHER'S CLASS CONSTRUCTOR OR DESTRUCTOR
+
+
+class B{ // ABSTRACT CLASS  
+public:
+    virtual ~B() = 0 ; // PURE VIRTUAL DESTRUCTOR 
+};
+
+class D:public B{
+public:
+    ~D(){ cout << "Derived destructor" << endl ; }
+    ~B(){ cout << "Implemented PVF" << endl ; }
+};
+
+int main(){
+    B *b = new D() ; 
+    delete b ;
+    return 0 ;
+}
+
+// 16 --- DESTRUCTORS 
+// OUTPUT --- DERIVED DESTRUCTOR , IMPLEMENTED PVF 
+
+class B{ // ABSTRACT CLASS  
+public:
+    virtual ~B() = 0 ; // PURE VIRTUAL DESTRUCTOR 
+};
+
+B::~B(){ cout << "Implemented PVF" << endl ; }
+
+class D:public B{
+public:
+    ~D(){ cout << "Derived destructor" << endl ; }
+};
+
+int main(){
+    B *b = new D() ; 
+    delete b ;
+    return 0 ;
+}
+
+// 17 --- OUTPUT --- D
+
+// WHICH OF THE FOLLOWING FALLS UNDER THE STATIC(COMPILE TIME) POLYMORPHISM
+// A) TEMPLATES
+// B) FUNCTION OVERLOADING
+// C) OPERATOR OVERLOADING
+// D) ALL OF THE ABOVE
+
+// 18 --- OUTPUT --- D 
+
+// WHAT ROLE A CONSTRUCTOR PLAYS IN THE CLASS ?
+// A) CONSTRUCTS A NEW CLASS
+// B) CONSTRUCTS A NEW OBJECT 
+// C) CONSTRUCTS A NEW FUNCTION 
+// D) INITIALIZES AN OBJECT 
